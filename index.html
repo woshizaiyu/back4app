@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harmony - Discord Bot</title>
-    <meta name="description" content="Harmony is an all-in-one Discord bot for moderation, music, leveling and server utility.">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Alex Chen - Software Developer</title>
     <style>
         * {
             margin: 0;
@@ -13,1482 +11,226 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
         :root {
-            --primary: #5865f2;
-            --primary-dark: #4752c4;
-            --accent: #57f287;
-            --yellow: #fee75c;
-            --pink: #eb459e;
-            --dark: #23272a;
-            --darker: #1e2124;
-            --chat-bg: #2b2d31;
-            --light: #f2f3fb;
-            --text: #2e3338;
-            --muted: #b9bbbe;
-            --white: #ffffff;
+            --bg: #f7f8fa;
+            --card: #ffffff;
+            --text: #24292f;
+            --muted: #656d76;
+            --accent: #0969da;
+            --border: #d0d7de;
         }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            background-color: var(--light);
+            background-color: var(--bg);
             color: var(--text);
-            line-height: 1.6;
+            line-height: 1.7;
         }
-
         header {
-            background: var(--dark);
-            color: var(--white);
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
             padding: 1rem 0;
             position: sticky;
             top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+            z-index: 10;
         }
-
         .container {
-            width: 90%;
-            max-width: 1200px;
+            max-width: 820px;
             margin: 0 auto;
+            padding: 0 1.5rem;
         }
-
-        .nav-container {
+        .nav-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.6rem;
+        .nav-row .logo {
+            font-size: 1.15rem;
             font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 1.9rem;
-            color: var(--primary);
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 1.8rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
             color: var(--accent);
         }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
+        .nav-row nav a {
+            color: var(--muted);
+            text-decoration: none;
+            margin-left: 1.2rem;
+            font-size: 0.92rem;
         }
-
-        nav ul li a:hover::after {
-            width: 100%;
+        .nav-row nav a:hover {
+            color: var(--accent);
         }
-
         .hero {
-            background:
-                radial-gradient(circle at 15% 25%, rgba(88, 101, 242, 0.35), transparent 45%),
-                radial-gradient(circle at 85% 75%, rgba(87, 242, 135, 0.16), transparent 40%),
-                linear-gradient(160deg, var(--darker), var(--dark));
-            color: var(--white);
-            padding: 5.5rem 0 6rem;
+            padding: 3.5rem 0 2rem;
+            text-align: center;
         }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1.05fr 0.95fr;
-            gap: 3.5rem;
-            align-items: center;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            background-color: rgba(88, 101, 242, 0.2);
-            border: 1px solid rgba(88, 101, 242, 0.55);
-            color: #b9c0ff;
-            font-size: 0.88rem;
-            padding: 0.35rem 1rem;
-            border-radius: 50px;
-            margin-bottom: 1.4rem;
-        }
-
         .hero h1 {
-            font-size: 3.2rem;
-            line-height: 1.15;
-            margin-bottom: 1rem;
+            font-size: 2.2rem;
+            margin-bottom: 0.6rem;
         }
-
-        .hero h1 span {
-            color: var(--primary);
-        }
-
-        .hero-desc {
-            font-size: 1.18rem;
-            margin-bottom: 2rem;
+        .hero p {
             color: var(--muted);
+            max-width: 560px;
+            margin: 0 auto 1.4rem;
         }
-
-        .hero-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            margin-bottom: 2.2rem;
-        }
-
-        .btn {
+        .hero .btn {
             display: inline-block;
-            background-color: var(--primary);
-            color: var(--white);
-            padding: 0.85rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
-        }
-
-        .btn:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
-        }
-
-        .btn.secondary {
-            background-color: transparent;
-            border: 2px solid var(--white);
-        }
-
-        .btn.secondary:hover {
-            background-color: rgba(255, 255, 255, 0.12);
-        }
-
-        .btn.small {
+            background: var(--accent);
+            color: #fff;
             padding: 0.55rem 1.4rem;
-            font-size: 0.92rem;
-        }
-
-        .hero-trust {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-            color: var(--muted);
-            font-size: 0.95rem;
-        }
-
-        .hero-trust span i {
-            color: var(--accent);
-            margin-right: 6px;
-        }
-
-        .chat-demo {
-            background-color: var(--chat-bg);
-            border-radius: 14px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-        }
-
-        .chat-head {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 0.85rem 1.2rem;
-            background-color: #1e1f22;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            color: #f2f3f5;
-            font-weight: 600;
-        }
-
-        .chat-head i {
-            color: var(--muted);
-        }
-
-        .chat-body {
-            padding: 1.2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.1rem;
-        }
-
-        .msg {
-            display: flex;
-            gap: 12px;
-        }
-
-        .avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 0.95rem;
-            flex-shrink: 0;
-            color: var(--white);
-        }
-
-        .avatar.user {
-            background: linear-gradient(135deg, #eb459e, #f47b67);
-        }
-
-        .avatar.bot {
-            background: linear-gradient(135deg, var(--primary), #00c6ff);
-        }
-
-        .msg-content {
-            min-width: 0;
-        }
-
-        .msg-meta {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 2px;
-        }
-
-        .msg-name {
-            font-weight: 600;
-            color: #f2f3f5;
-        }
-
-        .badge-app {
-            background-color: var(--primary);
-            color: var(--white);
-            font-size: 0.62rem;
-            font-weight: 700;
-            padding: 1px 5px;
-            border-radius: 4px;
-            letter-spacing: 0.03em;
-        }
-
-        .msg-time {
-            color: #949ba4;
-            font-size: 0.72rem;
-        }
-
-        .msg-text {
-            color: #dbdee1;
-            font-size: 0.95rem;
-        }
-
-        .msg-text code {
-            background-color: #1e1f22;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: Consolas, Monaco, monospace;
-            font-size: 0.85rem;
-            color: #dbdee1;
-        }
-
-        .embed {
-            margin-top: 6px;
-            background-color: #1e1f22;
-            border-left: 4px solid var(--accent);
             border-radius: 6px;
-            padding: 0.8rem 1rem;
-            max-width: 420px;
+            text-decoration: none;
+            font-size: 0.95rem;
         }
-
-        .embed.purple {
-            border-left-color: var(--primary);
-        }
-
-        .embed-title {
-            color: #f2f3f5;
-            font-weight: 600;
-            font-size: 0.92rem;
-            margin-bottom: 4px;
-        }
-
-        .embed-title i {
-            color: var(--accent);
-            margin-right: 6px;
-        }
-
-        .embed.purple .embed-title i {
-            color: var(--primary);
-        }
-
-        .embed-desc {
-            color: #b5bac1;
-            font-size: 0.85rem;
-        }
-
-        .progress {
-            height: 8px;
-            background-color: #111214;
-            border-radius: 4px;
-            margin-top: 8px;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 100%;
-            width: 68%;
-            background: linear-gradient(to right, var(--primary), #00c6ff);
-            border-radius: 4px;
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.3rem;
-            color: var(--dark);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--primary);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.6rem;
-        }
-
-        .feature-card {
-            background-color: var(--white);
-            border-radius: 12px;
-            padding: 1.9rem 1.5rem;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-8px);
-        }
-
-        .feature-icon {
-            width: 64px;
-            height: 64px;
-            margin: 0 auto 1.1rem;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.7rem;
-            color: var(--white);
-        }
-
-        .feature-icon.c1 { background: linear-gradient(135deg, #5865f2, #7983f5); }
-        .feature-icon.c2 { background: linear-gradient(135deg, #eb459e, #f47b67); }
-        .feature-icon.c3 { background: linear-gradient(135deg, #57f287, #2dc770); }
-        .feature-icon.c4 { background: linear-gradient(135deg, #fee75c, #f0b232); color: #4a3b00; }
-        .feature-icon.c5 { background: linear-gradient(135deg, #00c6ff, #0072ff); }
-        .feature-icon.c6 { background: linear-gradient(135deg, #a55eea, #8850d8); }
-        .feature-icon.c7 { background: linear-gradient(135deg, #ff6b6b, #ee5253); }
-        .feature-icon.c8 { background: linear-gradient(135deg, #10ac84, #1dd1a1); }
-
-        .feature-card h3 {
-            font-size: 1.18rem;
-            margin-bottom: 0.6rem;
-            color: var(--dark);
-        }
-
-        .feature-card p {
-            font-size: 0.94rem;
-        }
-
-        .steps-band {
-            background-color: var(--white);
-        }
-
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .step {
-            text-align: center;
-            position: relative;
-            padding: 0 1rem;
-        }
-
-        .step-num {
-            width: 58px;
-            height: 58px;
-            margin: 0 auto 1.2rem;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), #7983f5);
-            color: var(--white);
-            font-size: 1.4rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 8px 18px rgba(88, 101, 242, 0.35);
-        }
-
-        .step h3 {
-            color: var(--dark);
-            margin-bottom: 0.6rem;
-        }
-
-        .step p {
-            font-size: 0.96rem;
-        }
-
-        .stats-band {
-            background: linear-gradient(to right, var(--primary), var(--primary-dark));
-            color: var(--white);
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-item i {
-            font-size: 2.1rem;
-            margin-bottom: 0.7rem;
+        .hero .btn:hover {
             opacity: 0.9;
         }
-
-        .stat-item h3 {
-            font-size: 2.3rem;
-            margin-bottom: 0.2rem;
+        section {
+            padding: 2rem 0;
         }
-
-        .stat-item p {
-            opacity: 0.85;
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.6rem 1.8rem;
+            margin-bottom: 1.2rem;
         }
-
-        .cmd-tabs {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-            margin-bottom: 2rem;
-        }
-
-        .cmd-tab {
-            background-color: var(--white);
-            border: 2px solid transparent;
+        .card h2 {
+            font-size: 1.25rem;
+            margin-bottom: 0.9rem;
             color: var(--text);
-            padding: 0.5rem 1.4rem;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.25s ease;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
         }
-
-        .cmd-tab:hover {
-            transform: translateY(-2px);
+        .tags span {
+            display: inline-block;
+            background: #eff6ff;
+            color: var(--accent);
+            border: 1px solid #cfe4ff;
+            border-radius: 20px;
+            padding: 0.2rem 0.85rem;
+            font-size: 0.82rem;
+            margin: 0.25rem 0.35rem 0.25rem 0;
         }
-
-        .cmd-tab.active {
-            background-color: var(--primary);
-            color: var(--white);
-            box-shadow: 0 6px 14px rgba(88, 101, 242, 0.35);
+        ul.plain {
+            list-style: none;
+            padding: 0;
         }
-
-        .commands-wrap {
-            background-color: var(--white);
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            overflow: hidden;
+        ul.plain li {
+            padding: 0.35rem 0;
+            border-bottom: 1px solid #f0f2f5;
         }
-
-        .command-row {
-            display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 1.5rem;
-            padding: 1.05rem 1.8rem;
-            border-bottom: 1px solid #eceef2;
-            align-items: center;
-        }
-
-        .command-row:last-child {
+        ul.plain li:last-child {
             border-bottom: none;
         }
-
-        .command-row.hidden {
-            display: none;
-        }
-
-        .command-row code {
-            background-color: var(--light);
-            color: var(--primary);
-            font-family: Consolas, Monaco, monospace;
-            font-size: 0.93rem;
-            padding: 0.4rem 0.9rem;
-            border-radius: 6px;
-            justify-self: start;
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            max-width: 860px;
-            margin: 0 auto;
-        }
-
-        .price-card {
-            background-color: var(--white);
-            border-radius: 14px;
-            padding: 2.4rem 2rem;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            position: relative;
-            transition: transform 0.3s ease;
-        }
-
-        .price-card:hover {
-            transform: translateY(-6px);
-        }
-
-        .price-card.featured {
-            border: 2px solid var(--primary);
-            box-shadow: 0 12px 30px rgba(88, 101, 242, 0.22);
-        }
-
-        .pop-badge {
-            position: absolute;
-            top: -14px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: var(--primary);
-            color: var(--white);
-            font-size: 0.78rem;
-            font-weight: 700;
-            padding: 0.3rem 1.1rem;
-            border-radius: 50px;
-            white-space: nowrap;
-        }
-
-        .price-card h3 {
-            color: var(--dark);
-            font-size: 1.35rem;
-            margin-bottom: 0.4rem;
-        }
-
-        .price {
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: var(--dark);
-            margin-bottom: 1.4rem;
-        }
-
-        .price small {
-            font-size: 1rem;
-            font-weight: 500;
-            color: #8a9099;
-        }
-
-        .price-list {
-            list-style: none;
-            text-align: left;
-            margin-bottom: 1.8rem;
-        }
-
-        .price-list li {
-            padding: 0.45rem 0;
-            font-size: 0.97rem;
-        }
-
-        .price-list li i {
-            color: var(--accent);
-            margin-right: 10px;
-        }
-
-        .price-list li.off {
-            color: #a6adb5;
-        }
-
-        .price-list li.off i {
-            color: #cfd4da;
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.8rem;
-        }
-
-        .testimonial {
-            background-color: var(--white);
-            border-radius: 12px;
-            padding: 1.8rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        .stars {
-            color: var(--yellow);
-            margin-bottom: 0.9rem;
-            filter: drop-shadow(0 1px 1px rgba(0,0,0,0.15));
-        }
-
-        .testimonial p {
-            font-size: 0.96rem;
-            margin-bottom: 1.2rem;
-        }
-
-        .t-user {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .t-avatar {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            color: var(--white);
-        }
-
-        .t-name {
-            font-weight: 600;
-            color: var(--dark);
-            line-height: 1.2;
-        }
-
-        .t-role {
-            font-size: 0.82rem;
-            color: #8a9099;
-        }
-
-        .faq-list {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .faq-item {
-            background-color: var(--white);
-            border-radius: 10px;
-            margin-bottom: 1rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            overflow: hidden;
-        }
-
-        .faq-item summary {
-            padding: 1.15rem 1.6rem;
-            font-weight: 600;
-            color: var(--dark);
-            cursor: pointer;
-            list-style: none;
-            position: relative;
-        }
-
-        .faq-item summary::-webkit-details-marker {
-            display: none;
-        }
-
-        .faq-item summary::after {
-            content: '+';
-            position: absolute;
-            right: 1.6rem;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.4rem;
-            color: var(--primary);
-            transition: transform 0.3s ease;
-        }
-
-        .faq-item[open] summary::after {
-            transform: translateY(-50%) rotate(45deg);
-        }
-
-        .faq-item p {
-            padding: 0 1.6rem 1.3rem;
-        }
-
-        .cta {
-            background:
-                radial-gradient(circle at 75% 25%, rgba(87, 242, 135, 0.16), transparent 42%),
-                linear-gradient(160deg, var(--darker), var(--dark));
-            color: var(--white);
-            text-align: center;
-        }
-
-        .cta h2 {
-            font-size: 2.3rem;
-            margin-bottom: 1.2rem;
-        }
-
-        .cta p {
-            font-size: 1.12rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
+        .muted {
             color: var(--muted);
         }
-
+        .link {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        .link:hover {
+            text-decoration: underline;
+        }
         footer {
-            background-color: var(--darker);
-            color: var(--white);
-            padding: 3rem 0 1.5rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 2.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.15rem;
-            margin-bottom: 1.3rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--primary);
-        }
-
-        .footer-column p {
-            color: var(--muted);
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.65rem;
-        }
-
-        .footer-links li a {
-            color: var(--muted);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 0.95rem;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.2rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.08);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--primary);
-            transform: translateY(-4px);
-        }
-
-        .copyright {
             text-align: center;
-            padding-top: 1.8rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
             color: var(--muted);
-            font-size: 0.92rem;
+            font-size: 0.85rem;
+            padding: 2.2rem 0 1.5rem;
+            border-top: 1px solid var(--border);
+            margin-top: 1rem;
         }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(26px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        @media (max-width: 992px) {
-            .hero-grid {
-                grid-template-columns: 1fr;
-                gap: 2.5rem;
-            }
-
-            .features-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .stats,
-            .steps {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .testimonials-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .pricing-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
+        @media (max-width: 640px) {
             .hero h1 {
-                font-size: 2.3rem;
+                font-size: 1.7rem;
             }
-
-            .hero-desc {
-                font-size: 1.02rem;
-            }
-
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--dark);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-            }
-
-            nav ul.active {
-                display: flex;
-            }
-
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-
-            .mobile-menu {
-                display: block;
-            }
-
-            .features-grid,
-            .footer-content,
-            .stats,
-            .steps {
-                grid-template-columns: 1fr;
-            }
-
-            .command-row {
-                grid-template-columns: 1fr;
-                gap: 0.4rem;
+            .nav-row nav a {
+                margin-left: 0.8rem;
             }
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-robot"></i>
-                <span>Harmony</span>
-            </div>
+        <div class="container nav-row">
+            <div class="logo">Sophia Jordan</div>
             <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#commands">Commands</a></li>
-                    <li><a href="#pricing">Premium</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                    <li><a href="#invite">Invite</a></li>
-                </ul>
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
             </nav>
         </div>
     </header>
 
-    <section class="hero" id="home">
-        <div class="container hero-grid">
-            <div class="hero-copy">
-                <div class="hero-badge"><i class="fas fa-bolt"></i> Trusted by 12,000+ servers</div>
-                <h1>Your Server, in <span>Perfect Harmony</span></h1>
-                <p class="hero-desc">Moderation, music, leveling and utilities — one bot to keep your community safe, active and entertained.</p>
-                <div class="hero-actions">
-                    <a href="#invite" class="btn"><i class="fab fa-discord" style="margin-right:8px"></i>Add to Discord</a>
-                    <a href="#features" class="btn secondary">Explore Features</a>
-                </div>
-                <div class="hero-trust">
-                    <span><i class="fas fa-circle-check"></i> Free core features</span>
-                    <span><i class="fas fa-circle-check"></i> 2-minute setup</span>
-                    <span><i class="fas fa-circle-check"></i> No credit card</span>
-                </div>
+    <div class="hero">
+        <div class="container">
+            <h1>Hi, I'm Sophia Jordan</h1>
+            <p>Software developer focused on building clean, reliable tools for the web and beyond. I enjoy turning ideas into working products.</p>
+            <a class="btn" href="#contact">Get in touch</a>
+        </div>
+    </div>
+
+    <section id="about">
+        <div class="container">
+            <div class="card">
+                <h2>About Me</h2>
+                <p>I'm a developer with a passion for automation, web applications, and solving everyday problems with code. When I'm not coding, you can find me reading, gaming, or exploring new tools.</p>
             </div>
-            <div class="chat-demo">
-                <div class="chat-head">
-                    <i class="fas fa-hashtag"></i> general
-                    <i class="fas fa-user-group" style="margin-left:auto"></i>
-                </div>
-                <div class="chat-body">
-                    <div class="msg">
-                        <div class="avatar user">A</div>
-                        <div class="msg-content">
-                            <div class="msg-meta">
-                                <span class="msg-name">alex_plays</span>
-                                <span class="msg-time">Today at 8:12 PM</span>
-                            </div>
-                            <div class="msg-text"><code>/play midnight city</code></div>
-                        </div>
-                    </div>
-                    <div class="msg">
-                        <div class="avatar bot">H</div>
-                        <div class="msg-content">
-                            <div class="msg-meta">
-                                <span class="msg-name">Harmony</span>
-                                <span class="badge-app">APP</span>
-                                <span class="msg-time">Today at 8:12 PM</span>
-                            </div>
-                            <div class="msg-text">
-                                <div class="embed">
-                                    <div class="embed-title"><i class="fas fa-play"></i>Now Playing</div>
-                                    <div class="embed-desc">M83 — Midnight City &middot; requested by alex_plays</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="msg">
-                        <div class="avatar user">J</div>
-                        <div class="msg-content">
-                            <div class="msg-meta">
-                                <span class="msg-name">june_w</span>
-                                <span class="msg-time">Today at 8:15 PM</span>
-                            </div>
-                            <div class="msg-text"><code>/rank @june_w</code></div>
-                        </div>
-                    </div>
-                    <div class="msg">
-                        <div class="avatar bot">H</div>
-                        <div class="msg-content">
-                            <div class="msg-meta">
-                                <span class="msg-name">Harmony</span>
-                                <span class="badge-app">APP</span>
-                                <span class="msg-time">Today at 8:15 PM</span>
-                            </div>
-                            <div class="msg-text">
-                                <div class="embed purple">
-                                    <div class="embed-title"><i class="fas fa-chart-line"></i>june_w reached Level 24</div>
-                                    <div class="embed-desc">2,340 XP to next level</div>
-                                    <div class="progress"><div class="progress-bar"></div></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <div class="card">
+                <h2>Skills</h2>
+                <div class="tags">
+                    <span>Python</span>
+                    <span>JavaScript</span>
+                    <span>Node.js</span>
+                    <span>Web Development</span>
+                    <span>Automation</span>
+                    <span>Linux</span>
+                    <span>Databases</span>
+                    <span>REST APIs</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="features">
+    <section id="projects">
         <div class="container">
-            <div class="section-title reveal">
-                <h2>Powerful Features</h2>
-                <p>Everything you need to run a healthy community, packed into a single bot.</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card reveal">
-                    <div class="feature-icon c1"><i class="fas fa-shield-halved"></i></div>
-                    <h3>Moderation</h3>
-                    <p>Auto-mod filters, raid protection, warn and mute systems that keep your server safe around the clock.</p>
-                </div>
-                <div class="feature-card reveal">
-                    <div class="feature-icon c2"><i class="fas fa-music"></i></div>
-                    <h3>Music</h3>
-                    <p>Crystal-clear playback with queue, loop, playlists, filters and DJ role support.</p>
-                </div>
-                <div class="feature-card reveal">
-                    <div class="feature-icon c3"><i class="fas fa-chart-line"></i></div>
-                    <h3>Leveling</h3>
-                    <p>XP, rank cards, leaderboards and reward roles that keep members engaged.</p>
-                </div>
-                <div class="feature-card reveal">
-                    <div class="feature-icon c4"><i class="fas fa-toolbox"></i></div>
-                    <h3>Utilities</h3>
-                    <p>Reminders, polls, starboard and 150+ slash commands for daily server life.</p>
-                </div>
-                <div class="feature-card reveal">
-                    <div class="feature-icon c5"><i class="fas fa-scroll"></i></div>
-                    <h3>Logging</h3>
-                    <p>Full audit trails for messages, members, roles and channels — searchable and exportable.</p>
-                </div>
-                <div class="feature-card reveal">
-                    <div class="feature-icon c6"><i class="fas fa-door-open"></i></div>
-                    <h3>Welcome System</h3>
-                    <p>Greet newcomers with custom images, auto-roles and guided onboarding flows.</p>
-                </div>
-                <div class="feature-card reveal">
-                    <div class="feature-icon c7"><i class="fas fa-ticket"></i></div>
-                    <h3>Tickets</h3>
-                    <p>Private support tickets with transcripts, claim buttons and category routing.</p>
-                </div>
-                <div class="feature-card reveal">
-                    <div class="feature-icon c8"><i class="fas fa-user-check"></i></div>
-                    <h3>Auto Roles</h3>
-                    <p>Reaction roles and timed promotion ladders that manage themselves.</p>
-                </div>
+            <div class="card">
+                <h2>Projects</h2>
+                <ul class="plain">
+                    <li>
+                        <strong>Task Runner</strong> - a lightweight tool for automating scheduled jobs and notifications.
+                    </li>
+                    <li>
+                        <strong>Status Board</strong> - a small dashboard for monitoring application health and uptime.
+                    </li>
+                    <li>
+                        <strong>Notes API</strong> - a simple REST service for personal note keeping and sync.
+                    </li>
+                </ul>
             </div>
         </div>
     </section>
 
-    <section class="steps-band">
+    <section id="contact">
         <div class="container">
-            <div class="section-title reveal">
-                <h2>Up and Running in Minutes</h2>
-                <p>No configuration files, no dashboards to learn. Three steps and you are done.</p>
+            <div class="card">
+                <h2>Contact</h2>
+                <p class="muted">Feel free to reach out for collaboration or a chat.</p>
+                <p style="margin-top:0.6rem;">
+                    Email: <a class="link" href="mailto:lolds521@outlook.com">lolds521@outlook.com</a><br>
+                    Company: Vari-Tec<br>
+                    Address: Lincoln Street, Santa Clara, CA<br>
+                    Phone: +1 351-690-6699 (US)
+                </p>
             </div>
-            <div class="steps">
-                <div class="step reveal">
-                    <div class="step-num">1</div>
-                    <h3>Invite the Bot</h3>
-                    <p>Click "Add to Discord", pick your server and approve the permissions. Takes about ten seconds.</p>
-                </div>
-                <div class="step reveal">
-                    <div class="step-num">2</div>
-                    <h3>Run /setup</h3>
-                    <p>The interactive wizard walks you through channels, logging and the modules you want enabled.</p>
-                </div>
-                <div class="step reveal">
-                    <div class="step-num">3</div>
-                    <h3>Enjoy Harmony</h3>
-                    <p>Moderation, music and leveling start working immediately. Fine-tune everything later with slash commands.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="stats-band">
-        <div class="container">
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-server"></i>
-                    <h3 class="counter" data-target="12500">0</h3>
-                    <p>Servers</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="3200000">0</h3>
-                    <p>Users Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-terminal"></i>
-                    <h3 class="counter" data-target="150">0</h3>
-                    <p>Slash Commands</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-plug-circle-check"></i>
-                    <h3 class="counter" data-target="99.9" data-decimals="1">0</h3>
-                    <p>% Uptime</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="commands">
-        <div class="container">
-            <div class="section-title reveal">
-                <h2>Command Library</h2>
-                <p>Type "/" in any channel to browse them all. Here are the community favorites.</p>
-            </div>
-            <div class="cmd-tabs reveal">
-                <button class="cmd-tab active" data-cat="all">All</button>
-                <button class="cmd-tab" data-cat="mod">Moderation</button>
-                <button class="cmd-tab" data-cat="music">Music</button>
-                <button class="cmd-tab" data-cat="level">Leveling</button>
-                <button class="cmd-tab" data-cat="util">Utility</button>
-            </div>
-            <div class="commands-wrap reveal">
-                <div class="command-row" data-cat="mod">
-                    <code>/setup</code>
-                    <span>Interactive setup wizard for moderation, logging and welcome channels.</span>
-                </div>
-                <div class="command-row" data-cat="mod">
-                    <code>/warn @user reason</code>
-                    <span>Issue a tracked warning; escalation actions trigger automatically.</span>
-                </div>
-                <div class="command-row" data-cat="mod">
-                    <code>/timeout @user 10m</code>
-                    <span>Temporarily mute a member with an optional public reason.</span>
-                </div>
-                <div class="command-row" data-cat="mod">
-                    <code>/purge 50</code>
-                    <span>Bulk delete recent messages, optionally filtered by author or bot.</span>
-                </div>
-                <div class="command-row" data-cat="music">
-                    <code>/play song name</code>
-                    <span>Search and play a track or playlist in your current voice channel.</span>
-                </div>
-                <div class="command-row" data-cat="music">
-                    <code>/queue</code>
-                    <span>Show the upcoming tracks with pagination and jump links.</span>
-                </div>
-                <div class="command-row" data-cat="music">
-                    <code>/filter bassboost</code>
-                    <span>Apply audio filters like bassboost, nightcore or 8D in one tap.</span>
-                </div>
-                <div class="command-row" data-cat="level">
-                    <code>/rank @user</code>
-                    <span>Show a member's level card with XP progress and leaderboard rank.</span>
-                </div>
-                <div class="command-row" data-cat="level">
-                    <code>/leaderboard xp</code>
-                    <span>Server-wide top 10 with weekly, monthly and all-time views.</span>
-                </div>
-                <div class="command-row" data-cat="level">
-                    <code>/rewards add</code>
-                    <span>Grant roles automatically when members reach a level.</span>
-                </div>
-                <div class="command-row" data-cat="util">
-                    <code>/poll question</code>
-                    <span>Create an instant reaction poll with optional multiple choices.</span>
-                </div>
-                <div class="command-row" data-cat="util">
-                    <code>/remind me in 2h</code>
-                    <span>Set personal or channel reminders so nothing gets forgotten.</span>
-                </div>
-                <div class="command-row" data-cat="util">
-                    <code>/ticket open</code>
-                    <span>Open a private support ticket with transcript on close.</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="pricing" style="background-color:#fff;">
-        <div class="container">
-            <div class="section-title reveal">
-                <h2>Simple Pricing</h2>
-                <p>Every core feature is free forever. Premium adds polish for those who want a little extra.</p>
-            </div>
-            <div class="pricing-grid">
-                <div class="price-card reveal">
-                    <h3>Free</h3>
-                    <div class="price">$0<small> forever</small></div>
-                    <ul class="price-list">
-                        <li><i class="fas fa-check"></i>All 150+ slash commands</li>
-                        <li><i class="fas fa-check"></i>Moderation, music, leveling, utilities</li>
-                        <li><i class="fas fa-check"></i>Logging and welcome system</li>
-                        <li><i class="fas fa-check"></i>Community support server</li>
-                        <li class="off"><i class="fas fa-xmark"></i>Custom rank card backgrounds</li>
-                        <li class="off"><i class="fas fa-xmark"></i>Extended playlist size (500 tracks)</li>
-                    </ul>
-                    <a href="#invite" class="btn secondary" style="border-color:var(--primary);color:var(--primary)">Get Started</a>
-                </div>
-                <div class="price-card featured reveal">
-                    <div class="pop-badge">Most Popular</div>
-                    <h3>Premium</h3>
-                    <div class="price">$3<small> / month</small></div>
-                    <ul class="price-list">
-                        <li><i class="fas fa-check"></i>Everything in Free</li>
-                        <li><i class="fas fa-check"></i>Custom rank card backgrounds</li>
-                        <li><i class="fas fa-check"></i>Extended playlist size (500 tracks)</li>
-                        <li><i class="fas fa-check"></i>Audio filters and volume boost</li>
-                        <li><i class="fas fa-check"></i>Priority support queue</li>
-                        <li><i class="fas fa-check"></i>Early access to beta features</li>
-                    </ul>
-                    <a href="#" class="btn">Go Premium</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="testimonials">
-        <div class="container">
-            <div class="section-title reveal">
-                <h2>Loved by Communities</h2>
-                <p>From tiny friend groups to servers with six-figure member counts.</p>
-            </div>
-            <div class="testimonials-grid">
-                <div class="testimonial reveal">
-                    <div class="stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                    </div>
-                    <p>"Replaced three different bots with Harmony. The auto-mod alone cut our moderator workload in half during raid season."</p>
-                    <div class="t-user">
-                        <div class="t-avatar" style="background:linear-gradient(135deg,#5865f2,#00c6ff)">M</div>
-                        <div>
-                            <div class="t-name">marcus_gg</div>
-                            <div class="t-role">Owner · 48k-member gaming hub</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial reveal">
-                    <div class="stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                    </div>
-                    <p>"The leveling system actually got our lurkers chatting again. Rank cards are gorgeous and setup took one command."</p>
-                    <div class="t-user">
-                        <div class="t-avatar" style="background:linear-gradient(135deg,#eb459e,#f47b67)">S</div>
-                        <div>
-                            <div class="t-name">sofia.builds</div>
-                            <div class="t-role">Admin · creative community</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial reveal">
-                    <div class="stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-stroke"></i>
-                    </div>
-                    <p>"Music quality is noticeably better than what we used before, and the ticket system handles our support queue perfectly."</p>
-                    <div class="t-user">
-                        <div class="t-avatar" style="background:linear-gradient(135deg,#57f287,#2dc770)">D</div>
-                        <div>
-                            <div class="t-name">devon_k</div>
-                            <div class="t-role">Founder · study group network</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="faq" style="background-color:#fff;">
-        <div class="container">
-            <div class="section-title reveal">
-                <h2>Frequently Asked Questions</h2>
-            </div>
-            <div class="faq-list">
-                <details class="faq-item">
-                    <summary>Is Harmony free to use?</summary>
-                    <p>Yes. Every core feature is free forever. An optional premium tier adds cosmetic extras like custom rank card backgrounds and bigger playlists.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>What permissions does the bot need?</summary>
-                    <p>The invite link requests only the permissions required for the features you enable. You can safely add it first and fine-tune channel overrides later.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>Can I disable modules I don't need?</summary>
-                    <p>Absolutely. Use /modules to toggle moderation, music, leveling or utilities on and off per server. Disabled modules consume no resources.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>Does the bot work with large servers?</summary>
-                    <p>Yes. Harmony shards automatically and serves communities of any size — our largest server has over 200,000 members.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>How is my data handled?</summary>
-                    <p>We store only what is needed for features you enable (levels, warnings, settings). Server owners can export or erase all data anytime with /data.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>Can I suggest new features?</summary>
-                    <p>Please do! Join the support server and drop ideas in the suggestions channel — the roadmap is largely community-driven.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>Where can I get help?</summary>
-                    <p>Join our support server linked in the footer, or run /help for inline documentation of every command.</p>
-                </details>
-            </div>
-        </div>
-    </section>
-
-    <section class="cta" id="invite">
-        <div class="container">
-            <h2>Ready to Bring Harmony to Your Server?</h2>
-            <p>Setup takes less than a minute. Invite the bot, run /setup, and your community is ready to go.</p>
-            <a href="#" class="btn"><i class="fab fa-discord" style="margin-right:8px"></i>Add to Discord</a>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Harmony</h3>
-                    <p>An all-in-one Discord bot built for communities of every size — from small friend groups to huge public servers.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-discord"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-github"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Product</h3>
-                    <ul class="footer-links">
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#commands">Commands</a></li>
-                        <li><a href="#pricing">Premium</a></li>
-                        <li><a href="#invite">Invite</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Resources</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Documentation</a></li>
-                        <li><a href="#">Status Page</a></li>
-                        <li><a href="#">Changelog</a></li>
-                        <li><a href="#">Roadmap</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Support</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Support Server</a></li>
-                        <li><a href="#faq">FAQ</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Harmony Bot. All rights reserved.</p>
-            </div>
+            <p>&copy; 2026 Sophia Jordan · Built with care</p>
         </div>
     </footer>
-
-    <script>
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
-
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200;
-
-            counters.forEach(counter => {
-                const target = parseFloat(counter.getAttribute('data-target'));
-                const decimals = parseInt(counter.getAttribute('data-decimals') || '0');
-                const current = parseFloat(counter.innerText.replace(/,/g, '')) || 0;
-
-                if (current < target) {
-                    const inc = target / speed;
-                    const next = Math.min(current + inc, target);
-                    counter.innerText = decimals
-                        ? next.toFixed(decimals)
-                        : Math.ceil(next).toLocaleString('en-US');
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = decimals ? target.toFixed(decimals) : target.toLocaleString('en-US');
-                }
-            });
-        }
-
-        window.addEventListener('load', animateCounters);
-
-        document.querySelectorAll('.cmd-tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                document.querySelectorAll('.cmd-tab').forEach(t => t.classList.remove('active'));
-                this.classList.add('active');
-                const cat = this.getAttribute('data-cat');
-                document.querySelectorAll('.command-row').forEach(row => {
-                    row.classList.toggle('hidden', cat !== 'all' && row.getAttribute('data-cat') !== cat);
-                });
-            });
-        });
-
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.12 });
-
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
-        });
-    </script>
 </body>
-
 </html>
