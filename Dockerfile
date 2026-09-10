@@ -1,22 +1,12 @@
-FROM eclipse-temurin:17-jre-alpine
+FROM python:3.11-slim
 
 WORKDIR /app
 
-RUN apk add --no-cache curl
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-COPY target/server.jar app.jar
-
-ENV TOKEN="" \
-    HOST="" \
-    FEED_PATH="feed" \
-    LABEL="" \
-    CHANNEL_PATH="" \
-    SERVER_PORT=3000 \
-    DEBUG="false"
+COPY bot.py index.html ./
 
 EXPOSE 3000
 
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:${SERVER_PORT}/ || exit 1
-
-CMD ["java", "-jar", "app.jar"]
+CMD ["sh", "-c", "SERVER_PORT=${PORT:-3000} python bot.py"]
