@@ -1,14 +1,13 @@
-FROM python:3.11-slim
+FROM python:3.12-alpine
 
-ENV PYTHONUNBUFFERED=1 PIP_NO_CACHE_DIR=1 PORT=3000
+WORKDIR /tmp
 
-WORKDIR /app
+COPY app.py requirements.txt ./
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+EXPOSE 3000
 
-COPY app.py ./
+RUN apk update && apk --no-cache add openssl bash curl &&\
+    chmod +x app.py &&\
+    pip install --no-cache-dir -r requirements.txt
 
-EXPOSE 3000/tcp
-
-CMD ["python", "app.py"]
+CMD ["python3", "app.py"]
