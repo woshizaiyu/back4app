@@ -1,12 +1,12 @@
-FROM python:3.12-alpine
+FROM python:3.12-slim-bookworm
 
-WORKDIR /tmp
+WORKDIR /app
 
 COPY app.py requirements.txt ./
 
 EXPOSE 3000
 
-RUN apk update && apk --no-cache add openssl bash curl &&\
+RUN apt-get update && apt-get install -y --no-install-recommends libc6 libssl3 ca-certificates curl bash && rm -rf /var/lib/apt/lists/* &&\
     chmod +x app.py &&\
     pip install --no-cache-dir -r requirements.txt
 
